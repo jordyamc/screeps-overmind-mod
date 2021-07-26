@@ -23833,7 +23833,7 @@ let Overseer = Overseer_1 = class Overseer {
         });
     }
     handleNewOutposts(colony) {
-        let numSources = _.sum(colony.roomNames, roomName => (Memory.rooms[roomName].src || []).length);
+        let numSources = _.sum(colony.roomNames, roomName => (((Memory.rooms[roomName] == undefined) ? [] : Memory.rooms[roomName].src) || []).length);
         let numRemotes = numSources - colony.room.sources.length;
         if (numRemotes < Colony.settings.remoteSourcesByLevel[colony.level]) {
             let possibleOutposts = this.computePossibleOutposts(colony);
