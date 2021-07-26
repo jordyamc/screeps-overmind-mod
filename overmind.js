@@ -14147,7 +14147,7 @@ let RandomWalkerScoutOverlord = class RandomWalkerScoutOverlord extends Overlord
             // Pick a new room
             let neighboringRooms = _.values(Game.map.describeExits(scout.pos.roomName));
             let roomName = _.sample(neighboringRooms);
-            if (Game.map.getRoomStatus(roomName).status === 'normal') {
+            if (Game.map.getRoomStatus(roomName).status != 'closed') {
                 scout.task = Tasks.goToRoom(roomName);
             }
         }
@@ -23471,7 +23471,7 @@ let Strategist = class Strategist {
                     }
                 }
                 // Update best choices
-                if (score > bestScore && Game.map.getRoomStatus(roomName).status === 'normal') {
+                if (score > bestScore && Game.map.getRoomStatus(roomName).status != 'closed') {
                     bestScore = score;
                     bestRoom = roomName;
                 }
@@ -23829,7 +23829,7 @@ let Overseer = Overseer_1 = class Overseer {
             }
             let neighboringRooms = _.values(Game.map.describeExits(roomName));
             let isReachableFromColony = _.any(neighboringRooms, r => colony.roomNames.includes(r));
-            return isReachableFromColony && Game.map.getRoomStatus(roomName).status === 'normal';
+            return isReachableFromColony && Game.map.getRoomStatus(roomName).status != 'closed';
         });
     }
     handleNewOutposts(colony) {
